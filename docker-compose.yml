@@ -1,0 +1,70 @@
+version: "3"
+
+services:
+  reverse-proxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - dev
+  mysql:
+    image: mysql:8.0.30
+    restart: always
+    environment:
+      TZ: Europe/London
+      VIRTUAL_HOST: ${MYSQL_HOST}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER_NAME}
+      MYSQL_PASSWORD: ${MYSQL_USER_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - ./services/mysql/my.cnf:/etc/mysql/my.cnf
+      - ./services/mysql/dumps:/docker-entrypoint-initdb.d
+    networks:
+      - dev
+  adminer:
+    build: ./services/adminer/.
+    restart: always
+    environment:
+      VIRTUAL_HOST: ${ADMINER_HOST}
+      ADMINER_DEFAULT_SERVER: mysql
+      ADMINER_DESIGN: konya
+    depends_on:
+        - mysql
+    networks:
+      - dev
+  mongodb:
+    image: mongo
+    restart: always
+    environment:
+      VIRTUAL_HOST: ${MONGO_HOST}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    ports:
+      - 27017:27017
+    networks:
+      - dev
+    volumes:
+      - ./services/mongodb/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./services/mongodb/mongod.conf:/etc/mongod.conf
+  mongoexpress:
+    image: mongo-express
+    restart: always
+    environment:
+      VIRTUAL_HOST: ${MONGO_EXPRESS_HOST}
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_ROOT_USER}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_ROOT_PASSWORD}
+    depends_on:
+        - mongodb
+    networks:
+      - dev
+
+networks:
+  dev:
+    external: true
