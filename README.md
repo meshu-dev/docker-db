@@ -54,6 +54,8 @@ vim /etc/hosts
 127.0.0.1   adminer.local
 127.0.0.1   mongodb.local
 127.0.0.1   mongoexpress.local
+127.0.0.1   postgresql.local
+127.0.0.1   redis.local
 ```
 
 ***Windows version***
@@ -75,6 +77,8 @@ Select hosts to open, add in the below lines, save and finally close notepad.
 127.0.0.1   adminer.local
 127.0.0.1   mongodb.local
 127.0.0.1   mongoexpress.local
+127.0.0.1   postgresql.local
+127.0.0.1   redis.local
 ```
 
 5. Create and run containers with the following command...

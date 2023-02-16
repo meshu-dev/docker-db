@@ -64,6 +64,25 @@ services:
         - mongodb
     networks:
       - dev
+  postgresql:
+    image: postgres
+    restart: always
+    environment:
+      VIRTUAL_HOST: postgresql.local
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    networks:
+      - dev
+  redis:
+    build: ./services/redis/.
+    ports:
+      - 6379:6379
+    restart: always
+    networks:
+      - dev
+    environment:
+      - VIRTUAL_HOST=redis.local
 
 networks:
   dev:
