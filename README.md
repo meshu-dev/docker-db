@@ -30,11 +30,11 @@ cd ~/
 2. Clone repository and then change directory to inside of the repository
 
 ```
-git clone git@github.com:meshu-dev/docker-db.git
+git clone git@github.com:meshu-dev/docker-services.git
 ```
 
 ```
-cd docker-db
+cd docker-services
 ```
 
 3. Create docker network by running the following command...
