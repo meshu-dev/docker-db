@@ -68,10 +68,10 @@ services:
     image: postgres
     restart: always
     environment:
-      VIRTUAL_HOST: postgresql.local
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      VIRTUAL_HOST: ${POSTGRESQL_HOST}
+      POSTGRES_DB: postgres ${POSTGRESQL_DB}
+      POSTGRES_USER: postgres ${POSTGRESQL_USER}
+      POSTGRES_PASSWORD: password ${POSTGRESQL_PASSWORD}
     networks:
       - dev
   redis:
@@ -82,7 +82,7 @@ services:
     networks:
       - dev
     environment:
-      - VIRTUAL_HOST=redis.local
+      - VIRTUAL_HOST=${REDIS_HOST}
 
 networks:
   dev:
