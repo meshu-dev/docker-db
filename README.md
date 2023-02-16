@@ -1,10 +1,10 @@
-# Docker setup for databases
+# Docker setup for services
 
-This setup allows you to use docker and docker-compose to provide database services to support development.
+This setup allows you to use docker and docker-compose to provide services to support development.
 
 ## Prerequisites
 
-Install [Gitbash](https://gitforwindows.org/) if using Windows
+Install [Gitbash](https://gitforwindows.org) if using Windows
 
 Go to user directory and open the .bashrc file
 
