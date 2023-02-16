@@ -69,9 +69,11 @@ services:
     restart: always
     environment:
       VIRTUAL_HOST: ${POSTGRESQL_HOST}
-      POSTGRES_DB: postgres ${POSTGRESQL_DB}
-      POSTGRES_USER: postgres ${POSTGRESQL_USER}
-      POSTGRES_PASSWORD: password ${POSTGRESQL_PASSWORD}
+      POSTGRES_DB: ${POSTGRESQL_DB}
+      POSTGRES_USER: ${POSTGRESQL_USER}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
+    ports:
+      - 5432:5432
     networks:
       - dev
   redis:
