@@ -27,17 +27,6 @@ services:
       - ./services/mysql/dumps:/docker-entrypoint-initdb.d
     networks:
       - dev
-  adminer:
-    build: ./services/adminer/.
-    restart: always
-    environment:
-      VIRTUAL_HOST: ${ADMINER_HOST}
-      ADMINER_DEFAULT_SERVER: mysql
-      ADMINER_DESIGN: konya
-    depends_on:
-        - mysql
-    networks:
-      - dev
   mongodb:
     image: mongo
     restart: always

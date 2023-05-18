@@ -51,7 +51,6 @@ vim /etc/hosts
 
 ```
 127.0.0.1   mysql.local
-127.0.0.1   adminer.local
 127.0.0.1   mongodb.local
 127.0.0.1   mongoexpress.local
 127.0.0.1   postgresql.local
@@ -74,7 +73,6 @@ Select hosts to open, add in the below lines, save and finally close notepad.
 
 ```
 127.0.0.1   mysql.local
-127.0.0.1   adminer.local
 127.0.0.1   mongodb.local
 127.0.0.1   mongoexpress.local
 127.0.0.1   postgresql.local
