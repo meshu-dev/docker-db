@@ -79,15 +79,21 @@ Select hosts to open, add in the below lines, save and finally close notepad.
 127.0.0.1   redis.local
 ```
 
-5. Create and run containers with the following command...
+5. Copy .env-example to .env and fill in details in file
+
+```
+cp .env-example .env
+```
+
+6. Create and run containers with the following command...
 
 ```
 dc up -d
 ```
 
-6. Up open your web browser and go to http://adminer.local and the website should show up.
+7. Up open your web browser and go to http://adminer.local and the website should show up.
 
-7. Start expanding the docker dev setup by adding your own services, check below to see commands on how to use setup.
+8. Start expanding the docker dev setup by adding your own services, check below to see commands on how to use setup.
 
 ___
 

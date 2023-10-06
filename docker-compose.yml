@@ -1,32 +1,6 @@
 version: "3"
 
 services:
-  reverse-proxy:
-    image: jwilder/nginx-proxy
-    restart: always
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    networks:
-      - dev
-  mysql:
-    image: mysql:8.0.30
-    restart: always
-    environment:
-      TZ: Europe/London
-      VIRTUAL_HOST: ${MYSQL_HOST}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: ${MYSQL_USER_NAME}
-      MYSQL_PASSWORD: ${MYSQL_USER_PASSWORD}
-    ports:
-      - 3306:3306
-    volumes:
-      - ./services/mysql/my.cnf:/etc/mysql/my.cnf
-      - ./services/mysql/dumps:/docker-entrypoint-initdb.d
-    networks:
-      - dev
   mongodb:
     image: mongo
     restart: always
@@ -51,29 +25,10 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_ROOT_PASSWORD}
     depends_on:
         - mongodb
-    networks:
-      - dev
-  postgresql:
-    image: postgres
-    restart: always
-    environment:
-      VIRTUAL_HOST: ${POSTGRESQL_HOST}
-      POSTGRES_DB: ${POSTGRESQL_DB}
-      POSTGRES_USER: ${POSTGRESQL_USER}
-      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
     ports:
-      - 5432:5432
+      - 8081:8081
     networks:
       - dev
-  redis:
-    build: ./services/redis/.
-    ports:
-      - 6379:6379
-    restart: always
-    networks:
-      - dev
-    environment:
-      - VIRTUAL_HOST=${REDIS_HOST}
 
 networks:
   dev:
